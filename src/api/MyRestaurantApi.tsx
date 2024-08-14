@@ -1,6 +1,6 @@
 import { Restaurant } from "@/types/types";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -82,6 +82,7 @@ export const useGetMyRestaurant = () => {
 
 export const useUpdateMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
+  const queryClient = useQueryClient()
   const createMyRestaurantRequest = async (
     restaurantFormData: FormData
   ): Promise<Restaurant> => {
@@ -118,6 +119,7 @@ export const useUpdateMyRestaurant = () => {
   }
   if (isSuccess) {
     toast.success("Restaurant updated successfully");
+   queryClient .invalidateQueries({ queryKey: [" myRestaurant"] });
     reset();
   }
   return { updateMyRestaurant, isLoading };
