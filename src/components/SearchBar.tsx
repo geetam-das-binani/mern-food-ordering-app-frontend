@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -54,7 +54,7 @@ const SearchBar = ({ onSubmit, placeHolder, onReset, searchQuery }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  className="text-xl border-none shadow-none  placeholder:text-xl focus-visible:ring-0"
+                  className="text-xl border-none shadow-none placeholder:text-xl focus-visible:ring-0"
                   placeholder={placeHolder}
                 />
               </FormControl>
