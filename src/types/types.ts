@@ -28,3 +28,13 @@ export type Restaurant = {
   lastUpdated:Date,
   imageUrl:string
 };
+
+
+export type SearchResults = {
+  data: Restaurant[];
+  pagination: {
+    total:number,
+    page:number,
+    totalPages:number
+  };
+}
