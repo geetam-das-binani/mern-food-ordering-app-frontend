@@ -1,4 +1,4 @@
-import { useSearchRestaurant } from "@/api/RestaurantSearchApi";
+import { useSearchRestaurant } from "@/api/RestaurantApi";
 import { useParams } from "react-router-dom";
 import SearchResultsInfo from "../components/SearchResultsInfo";
 import SearchResultsCard from "@/components/SearchResultsCard";
@@ -78,7 +78,7 @@ const SearchPage = () => {
       <div id="main-content" className="flex flex-col gap-5">
         <div className="flex flex-col justify-between gap-3 lg:flex-row">
           <SearchResultsInfo total={results.pagination.total} city={city} />
-          <SortOptionDropDown onChange={setSortOption} />
+          <SortOptionDropDown onChange={setSortOption } sortOption={searchState.sortOption} />
         </div>
 
         <SearchBar

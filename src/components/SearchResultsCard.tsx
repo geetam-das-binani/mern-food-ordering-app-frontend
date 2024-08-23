@@ -7,6 +7,8 @@ type Props = {
   restaurant: Restaurant;
 };
 const SearchResultsCard = ({ restaurant }: Props) => {
+
+
   return (
     <Link
       to={`/detail/${restaurant._id}`}
@@ -20,7 +22,7 @@ const SearchResultsCard = ({ restaurant }: Props) => {
         />
       </AspectRatio>
      <div>
-     <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:underline">{restaurant.restaurantName}</h3>
+     <h3 className="mb-2 text-2xl font-bold tracking-tight group-hover:underline">{restaurant.restaurantName}</h3>
       <div className="grid gap-2 md:grid-cols-2" id="card-content">
         <div className="flex flex-wrap">
           {restaurant.cuisines.map((cuisine, index) => (
@@ -30,7 +32,7 @@ const SearchResultsCard = ({ restaurant }: Props) => {
             </span>
           ))}
         </div>
-        <div className="gap-2 flex-col flex">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1 text-green-600">
             <Clock className="text-green-600" />
             {restaurant.estimatedDeliveryTime} mins

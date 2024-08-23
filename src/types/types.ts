@@ -7,7 +7,7 @@ export type User = {
   _id: string;
 };
 
-type MenuItem = {
+export type MenuItem = {
   _id: string;
   name: string;
   price: number;
@@ -38,3 +38,20 @@ export type SearchResults = {
     totalPages:number
   };
 }
+
+export  type CheckOutSessionrequest = {
+  cartItems: Array<{
+    menuItemId: string;
+    name: string;
+
+    quantity: number;
+  }>;
+  deliveryDetails: {
+    email: string;
+    city: string;
+    addressLine1: string;
+    name: string;
+    country: string;
+  };
+  restaurantId: string;
+};
