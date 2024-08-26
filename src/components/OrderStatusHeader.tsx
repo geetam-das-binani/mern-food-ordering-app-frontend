@@ -1,5 +1,5 @@
 import { Order } from "@/types/types";
-import { AspectRatio } from "./ui/aspect-ratio";
+
 import { Progress } from "./ui/progress";
 
 type Props = {
