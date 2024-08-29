@@ -1,9 +1,14 @@
 import {
   useCreateMyRestaurant,
   useGetMyRestaurant,
+  useGetMyRestaurantOrders,
   useUpdateMyRestaurant,
 } from "@/api/MyRestaurantApi";
+import OrderItemCard from "@/components/OrderItemCard";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ManageRestaurantForm from "@/forms/manage-restaurant-form/ManageRestaurantForm";
+import { TabsContent } from "@radix-ui/react-tabs";
+import { useEffect } from "react";
 
 const ManageRestaurantPage = () => {
   const { createMyRestaurant, isLoading: isCreateLoading } =
@@ -14,6 +19,8 @@ const ManageRestaurantPage = () => {
   const { updateMyRestaurant, isLoading: isUpdateLoading } =
     useUpdateMyRestaurant();
 
+  const { restaurantOrders } = useGetMyRestaurantOrders();
+
   if (isGetLoading) {
     return (
       <div className="flex items-center justify-center h-[50vh]">
@@ -23,12 +30,45 @@ const ManageRestaurantPage = () => {
   }
 
   const isEditing = !!currentRestaurant;
+ 
+ 
+
   return (
-    <ManageRestaurantForm
-      onSave={!isEditing ? createMyRestaurant : updateMyRestaurant}
-      isLoading={isCreateLoading || isUpdateLoading}
-      currentRestaurant={currentRestaurant || null}
-    />
+    <Tabs defaultValue="orders">
+      <TabsList>
+        {restaurantOrders && restaurantOrders.length > 0 && (
+          <TabsTrigger value="orders">Orders</TabsTrigger>
+        )}
+        <TabsTrigger value="manage-restaurant">Manage Restaurant</TabsTrigger>
+      </TabsList>
+      {restaurantOrders && restaurantOrders.length > 0 && (
+        <TabsContent
+          value="orders"
+          className="p-10 space-y-5 rounded-lg bg-gray-50"
+        >
+          <h2 className="text-2xl font-bold">
+            {restaurantOrders.length > 0 ? (
+              <>
+                {restaurantOrders.length} Active order
+                {restaurantOrders.length > 1 ? "s" : ""}
+              </>
+            ) : (
+              "No active orders"
+            )}
+          </h2>
+          {restaurantOrders?.map((order) => (
+            <OrderItemCard key={order._id} order={order} />
+          ))}
+        </TabsContent>
+      )}
+      <TabsContent value="manage-restaurant">
+        <ManageRestaurantForm
+          onSave={!isEditing ? createMyRestaurant : updateMyRestaurant}
+          isLoading={isCreateLoading || isUpdateLoading}
+          currentRestaurant={currentRestaurant || null}
+        />
+      </TabsContent>
+    </Tabs>
   );
 };
 

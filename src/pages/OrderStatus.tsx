@@ -1,5 +1,7 @@
 import { useGetMyOrders } from "@/api/OrderApi";
+import OrderStatusDetails from "@/components/OrderStatusDetails";
 import OrderStatusHeader from "@/components/OrderStatusHeader";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 const OrderStatus = () => {
   const { isLoading, orders } = useGetMyOrders();
@@ -18,15 +20,27 @@ const OrderStatus = () => {
       </div>
     );
   }
-  return <div className="space-y-10">
-          {
-            orders.map(order=>(
-              <div key={order._id} className="p-10 space-y-10 rounded-lg bg-gray-50">
-                <OrderStatusHeader order={order} />
-              </div>
-            ))
-          }
-    </div>;
+ 
+  
+  return (
+    <div className="space-y-10">
+      { orders.map((order) => (
+        <div key={order?._id} className="p-10 space-y-10 rounded-lg bg-gray-50">
+          <OrderStatusHeader order={order} />
+          <div className="grid gap-10 md:grid-cols-2">
+            <OrderStatusDetails order={order} />
+            <AspectRatio ratio={16 / 5}>
+              <img
+                className="object-cover w-full h-full rounded-lg"
+                src={order?.restaurant?.imageUrl}
+                alt={order?.restaurant?.restaurantName}
+              />
+            </AspectRatio>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default OrderStatus;

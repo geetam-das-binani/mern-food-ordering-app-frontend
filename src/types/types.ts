@@ -1,3 +1,5 @@
+import { order_status } from "@/config/order-status-config";
+
 export type User = {
   email: string;
   name: string;
@@ -87,3 +89,8 @@ export type Order = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type UpdateOrderStatusRequest={
+  status:string,
+  orderId:string
+}
