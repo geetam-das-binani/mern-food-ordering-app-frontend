@@ -8,7 +8,6 @@ import OrderItemCard from "@/components/OrderItemCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ManageRestaurantForm from "@/forms/manage-restaurant-form/ManageRestaurantForm";
 import { TabsContent } from "@radix-ui/react-tabs";
-import { useEffect } from "react";
 
 const ManageRestaurantPage = () => {
   const { createMyRestaurant, isLoading: isCreateLoading } =
