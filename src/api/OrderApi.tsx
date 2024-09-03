@@ -31,7 +31,7 @@ export const useGetMyOrders = () => {
     toast.error(error?.message ?? "Failed to fetch  my orders");
   }
   if(isSuccess){
-    toast.success("Orders fetched successfully");
+    toast.success("Orders fetched successfully",{duration:2000});
   }
 
   return { orders, isLoading };

@@ -146,6 +146,8 @@ export const useGetMyRestaurantOrders = () => {
   } = useQuery({
     queryFn: getMyRestaurantOrdersRequest,
     queryKey: [" restaurantOrders"],
+    
+    
   });
 
   if (error) {
@@ -157,6 +159,7 @@ export const useGetMyRestaurantOrders = () => {
 
 export const useUpdateMyRestaurantOrderStatus = () => {
   const { getAccessTokenSilently } = useAuth0();
+ 
   const updateMyRestaurantOrderStatus = async (
     updateStatusOrderRequest: UpdateOrderStatusRequest
   ): Promise<Order> => {
@@ -196,6 +199,7 @@ export const useUpdateMyRestaurantOrderStatus = () => {
   }
   if (isSuccess) {
     toast.success("Order status updated successfully");
+   
   }
 
   return { updateRestaurantStatus, isPending };
